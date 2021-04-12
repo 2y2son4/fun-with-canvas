@@ -58,7 +58,7 @@ canvas.addEventListener('mouseup', () => (isDrawing = false));
 canvas.addEventListener('mouseout', () => (isDrawing = false));
 
 function handleReset() {
-  location.reload();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 reset.addEventListener('click', handleReset);
