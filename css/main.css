@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: salmon;
+  height: 100vh;
+}
+
+.canvas {
+  background-color: beige;
+  background: url(../img/canvas.jpg) center fixed;
+  background-size: cover;
+  cursor: url(../img/cursor.cur), auto;
+  width: 95%;
+  height: 95%;
+  border: salmon 10px double;
+  border-radius: 20px;
+}
