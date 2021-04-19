@@ -78,14 +78,14 @@ reset.addEventListener('click', handleReset);
 // view image btn
 function viewImage() {
   const img = canvas.toDataURL('image/png');
-  const w = window.open('about:blank', 'image from canvas');
-  w.document.write("<img src='" + img + "' alt='from canvas'/>");
+  const w = window.open('about:blank', 'masterpiece from canvas');
+  w.document.write("<img src='" + img + "' alt='masterpiece from canvas'/>");
 }
 view.addEventListener('click', viewImage);
 
 // download image btn
 function downloadImage() {
-  downloader.download = 'image.png';
+  downloader.download = 'masterpiece.png';
   downloader.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
 }
 
