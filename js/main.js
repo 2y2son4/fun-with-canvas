@@ -4,8 +4,8 @@ const canvas = document.querySelector('#draw');
 const reset = document.querySelector('.reset');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.innerWidth - 200;
+canvas.height = window.innerHeight - 200;
 
 ctx.strokeStyle = '#fabada';
 ctx.lineJoin = 'round';
@@ -21,18 +21,26 @@ let lastY = 0;
 let hue = 0;
 let direction = true;
 
+function getCoords(ev) {
+  const boundingBox = canvas.getBoundingClientRect();
+  console.log(boundingBox);
+  const { left, top } = boundingBox;
+  return [ev.clientX - left, ev.clientY - top];
+}
+
 function draw(ev) {
   if (!isDrawing) return; // stop the function from running when mouse is not clicked
+
   ctx.strokeStyle = `hsl(${hue}, 60%, 60%)`;
 
   ctx.beginPath();
   // start from
   ctx.moveTo(lastX, lastY);
   // go to
-  ctx.lineTo(ev.offsetX, ev.offsetY);
+  ctx.lineTo(...getCoords(ev));
   ctx.stroke();
   // destructuring array
-  [lastX, lastY] = [ev.offsetX, ev.offsetY];
+  [lastX, lastY] = getCoords(ev);
   hue++;
   if (hue >= 360) {
     hue = 0;
@@ -51,7 +59,8 @@ function draw(ev) {
 
 canvas.addEventListener('mousedown', (ev) => {
   isDrawing = true;
-  [lastX, lastY] = [ev.offsetX, ev.offsetY];
+  [lastX, lastY] = getCoords(ev);
+  draw(ev);
 });
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', () => (isDrawing = false));
